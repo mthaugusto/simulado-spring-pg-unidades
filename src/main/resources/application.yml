@@ -1,11 +1,12 @@
 spring:
-  application:
-    name: unidades
-  profiles:
-    active: homologacao
-  thymeleaf:
-    check-template-location: false
-
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+    username: rm99697
+    password: 111294
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
 
 server:
   port: 80
