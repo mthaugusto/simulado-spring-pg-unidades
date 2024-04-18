@@ -24,6 +24,12 @@ public class ChefeService implements ServiceDTO<Chefe, ChefeRequest, ChefeRespon
     @Autowired
     private UnidadeRepository unidadeRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private UnidadeService unidadeService;
+
     @Override
     public Chefe toEntity(ChefeRequest r) {
         return Chefe.builder()
@@ -37,10 +43,14 @@ public class ChefeService implements ServiceDTO<Chefe, ChefeRequest, ChefeRespon
 
     @Override
     public ChefeResponse toResponse(Chefe e) {
-        return ChefeResponse.builder()
-                .inicio(e.getInicio())
-                .unidade(e.getUnidade() != null ? e.getUnidade().getId() : null)
 
+        return ChefeResponse.builder()
+                .id(e.getId())
+                .fim(e.getFim())
+                .inicio(e.getInicio())
+                .substituto(e.getSubstituto())
+                .usuario(usuarioService.toResponse(e.getUsuario()))
+                .unidade(unidadeService.toResponse(e.getUnidade()))
                 .build();
     }
 
